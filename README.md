@@ -1,3 +1,3 @@
-# stingshell
+# stings hell
 
 > tbh idk
