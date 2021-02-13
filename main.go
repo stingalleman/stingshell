@@ -13,9 +13,17 @@ func main() {
 	hostname, _ := os.Hostname()
 	user, _ := user.Current()
 	reader := bufio.NewReader(os.Stdin)
-	for {
+	homeDir, _ := os.UserHomeDir()
 
-		fmt.Printf("\n%s@%s >> ", user.Username, hostname)
+	for {
+		currentDir, _ := os.Getwd()
+
+		if currentDir == homeDir {
+			currentDir = "~"
+		}
+
+		fmt.Printf("\n%s\n", currentDir)
+		fmt.Printf("%s@%s >> ", user.Username, hostname)
 
 		input, err := reader.ReadString('\n')
 		if err != nil {
