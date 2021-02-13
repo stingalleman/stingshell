@@ -1,3 +1,3 @@
-# neofetch-go
+# stingshell
 
-> A neofetch fork, made in Go.
+> tbh idk
