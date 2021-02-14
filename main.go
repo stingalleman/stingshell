@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
 	"os/user"
+	"strings"
 
 	"github.com/stingalleman/stingshell/util"
 )
@@ -20,6 +21,8 @@ func main() {
 
 		if currentDir == homeDir {
 			currentDir = "~"
+		} else if strings.Contains(currentDir, homeDir) {
+			currentDir = "~" + strings.SplitAfter(currentDir, homeDir)[1]
 		}
 
 		fmt.Printf("\n%s\n", currentDir)
