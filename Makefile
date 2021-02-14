@@ -6,7 +6,10 @@ run:
 	go run .
 
 build-darwin:
-	CGO_ENABLED=0 GOOS=darwin GOARCH=amd64 go build .
+	GOOS=darwin GOARCH=amd64 go build .
 
 build-linux:
-	CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build .
+	GOOS=linux GOARCH=amd64 go build .
+
+build-windows:
+	GOOS=windows GOARCH=amd64 go build .
