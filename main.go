@@ -4,12 +4,15 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"os/signal"
 	"os/user"
 	"strings"
+	"syscall"
 
 	"github.com/fatih/color"
 	"github.com/stingalleman/stingshell/cmd"
 	"github.com/stingalleman/stingshell/config"
+	"github.com/stingalleman/stingshell/util"
 )
 
 func main() {
@@ -18,10 +21,12 @@ func main() {
 	reader := bufio.NewReader(os.Stdin)
 	homeDir, _ := os.UserHomeDir()
 
-	historyFile, _ := config.OpenFiles()
+	config.Files.OpenFiles()
 	yellow := color.New(color.FgYellow).SprintFunc()
 	green := color.New(color.FgGreen).SprintFunc()
 	bold := color.New(color.Bold).SprintFunc()
+
+	setupCloseHandler()
 
 	for {
 		currentDir, _ := os.Getwd()
@@ -39,10 +44,19 @@ func main() {
 		if err != nil {
 			fmt.Fprintln(os.Stderr, err)
 		}
-		config.WriteHistory(input, historyFile)
+		config.Files.AppendHistory(input)
 
 		if err = cmd.RunCmd(input); err != nil {
 			fmt.Fprintln(os.Stderr, err)
 		}
 	}
+}
+
+func setupCloseHandler() {
+	c := make(chan os.Signal)
+	signal.Notify(c, os.Interrupt, syscall.SIGTERM)
+	go func() {
+		<-c
+		util.ExitShell()
+	}()
 }

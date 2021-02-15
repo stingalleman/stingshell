@@ -1,7 +1,6 @@
 package cmd
 
 import (
-	"fmt"
 	"os"
 	"os/exec"
 	"strings"
@@ -30,7 +29,6 @@ func RunCmd(input string) error {
 		}
 	case "exit":
 		{
-			fmt.Fprint(os.Stderr, "bye bye!\n")
 			util.ExitShell()
 		}
 	}
