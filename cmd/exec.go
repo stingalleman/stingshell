@@ -8,12 +8,13 @@ import (
 	"github.com/stingalleman/stingshell/util"
 )
 
-// RunCmd execute command.
+// Exec executes input as command.
 func Exec(input string) error {
 	input = strings.TrimSuffix(input, "\n")
 	homeDir, _ := os.UserHomeDir()
 
 	input = strings.ReplaceAll(input, "~", homeDir)
+	input = os.ExpandEnv(input)
 
 	args := strings.Split(input, " ")
 
@@ -36,6 +37,7 @@ func Exec(input string) error {
 
 	cmd.Stderr = os.Stderr
 	cmd.Stdout = os.Stdout
+	cmd.Stdin = os.Stdin
 
 	return cmd.Run()
 }
