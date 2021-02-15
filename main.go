@@ -8,7 +8,8 @@ import (
 	"strings"
 
 	"github.com/fatih/color"
-	"github.com/stingalleman/stingshell/util"
+	"github.com/stingalleman/stingshell/cmd"
+	"github.com/stingalleman/stingshell/config"
 )
 
 func main() {
@@ -17,6 +18,7 @@ func main() {
 	reader := bufio.NewReader(os.Stdin)
 	homeDir, _ := os.UserHomeDir()
 
+	historyFile, _ := config.OpenFiles()
 	yellow := color.New(color.FgYellow).SprintFunc()
 	green := color.New(color.FgGreen).SprintFunc()
 	bold := color.New(color.Bold).SprintFunc()
@@ -37,8 +39,9 @@ func main() {
 		if err != nil {
 			fmt.Fprintln(os.Stderr, err)
 		}
+		config.WriteHistory(input, historyFile)
 
-		if err = util.RunCmd(input); err != nil {
+		if err = cmd.RunCmd(input); err != nil {
 			fmt.Fprintln(os.Stderr, err)
 		}
 	}
