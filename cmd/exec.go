@@ -9,7 +9,7 @@ import (
 )
 
 // RunCmd execute command.
-func RunCmd(input string) error {
+func Exec(input string) error {
 	input = strings.TrimSuffix(input, "\n")
 	homeDir, _ := os.UserHomeDir()
 
