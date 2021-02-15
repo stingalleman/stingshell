@@ -74,20 +74,12 @@ func (Build) All() {
 	mg.Deps(
 		Build.DarwinAmd64,
 		Build.LinuxAmd64,
-		Build.WindowsAmd64,
 	)
 }
 
 // Builds the shell for Linux (amd64)
 func (Build) LinuxAmd64() error {
 	return build("linux", "amd64", ".", BuildOptions{})
-}
-
-// Builds the shell for Windows (amd64)
-func (Build) WindowsAmd64() error {
-	return build("windows", "amd64", ".", BuildOptions{
-		Extension: "exe",
-	})
 }
 
 // Builds the shell for Darwin/macOS (amd64)
