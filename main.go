@@ -21,7 +21,7 @@ func main() {
 	reader := bufio.NewReader(os.Stdin)
 	homeDir, _ := os.UserHomeDir()
 
-	config.Files.OpenFiles()
+	config.OpenFiles()
 	yellow := color.New(color.FgYellow).SprintFunc()
 	green := color.New(color.FgGreen).SprintFunc()
 	bold := color.New(color.Bold).SprintFunc()
@@ -44,9 +44,9 @@ func main() {
 		if err != nil {
 			fmt.Fprintln(os.Stderr, err)
 		}
-		config.Files.AppendHistory(input)
+		config.HistoryFile.AppendHistory(input)
 
-		if err = cmd.RunCmd(input); err != nil {
+		if err = cmd.Exec(input); err != nil {
 			fmt.Fprintln(os.Stderr, err)
 		}
 	}

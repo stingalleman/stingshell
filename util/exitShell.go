@@ -9,7 +9,7 @@ import (
 
 // ExitShell exit shell
 func ExitShell() {
-	config.Files.CloseFiles()
+	config.CloseFiles()
 	fmt.Fprint(os.Stderr, "\nbye bye!\n")
 
 	os.Exit(0)
