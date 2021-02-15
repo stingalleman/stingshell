@@ -1,6 +1,8 @@
 package cmd
 
 import (
+	"errors"
+	"fmt"
 	"os"
 	"os/exec"
 	"strings"
@@ -27,6 +29,17 @@ func Exec(input string) error {
 				return os.Chdir(homeDir)
 			}
 			return os.Chdir(args[1])
+		}
+	case "export":
+		{
+			if len(args) <= 1 {
+				fmt.Print(os.Environ())
+			}
+			for i := 1; i < len(args); i++ {
+				values := strings.Split(args[i], "=")
+				os.Setenv(values[0], values[1])
+			}
+			return errors.New("")
 		}
 	case "exit":
 		{
