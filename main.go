@@ -6,6 +6,7 @@ import (
 	"os"
 	"os/signal"
 	"os/user"
+	"runtime"
 	"strings"
 	"syscall"
 
@@ -21,11 +22,18 @@ func main() {
 	reader := bufio.NewReader(os.Stdin)
 	homeDir, _ := os.UserHomeDir()
 
-	config.OpenFiles()
 	yellow := color.New(color.FgYellow).SprintFunc()
 	green := color.New(color.FgGreen).SprintFunc()
 	bold := color.New(color.Bold).SprintFunc()
 
+	// windows circlejerk
+	if runtime.GOOS == "windows" {
+		fgWhite := color.New(color.FgWhite).SprintFunc()
+		red := color.New(color.BgRed).SprintFunc()
+		fmt.Fprint(color.Output, bold(fgWhite(red("\n\n\ngast, ben je serieus fucking windows aan het gebruiken? ga fucking linux of macos gebruiken ofzo, fucking nerd. fucking borderline cretin, vieze gremlin creature\n\nmongool.\n\n"))))
+	}
+
+	config.OpenFiles()
 	setupCloseHandler()
 
 	for {
