@@ -30,7 +30,7 @@ func main() {
 	if runtime.GOOS == "windows" {
 		fgWhite := color.New(color.FgWhite).SprintFunc()
 		red := color.New(color.BgRed).SprintFunc()
-		fmt.Fprint(color.Output, bold(fgWhite(red("\n\n\ngast, ben je serieus fucking windows aan het gebruiken? ga fucking linux of macos gebruiken ofzo, fucking nerd. fucking borderline cretin, vieze gremlin creature\n\nmongool.\n\n"))))
+		fmt.Fprint(color.Output, bold(fgWhite(red("\n\n\ngast, ben je serieus fucking windows aan het gebruiken? ga fucking linux of macos gebruiken ofzo. fucking borderline cretin, vieze gremlin creature\n\nmongool.\n\n"))))
 	}
 
 	config.OpenFiles()
