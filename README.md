@@ -1,3 +1,1 @@
-# stings hell
 
-> tbh idk
